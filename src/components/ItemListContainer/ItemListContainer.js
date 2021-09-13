@@ -1,7 +1,7 @@
-function List(props) {
+function ItemListContainer(props) {
     return (
-        <h2>hola {props.hola} </h2>
+        <h2>HOLA {props.hola} </h2>
     );
   }
 
-export default List;
+export default ItemListContainer;

@@ -1,7 +1,7 @@
 function ShoppingCart() {
     return (
-        <div className="App">
-        <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+        <div className="App ml-auto">
+        <button className="fa fa-shopping-cart" aria-hidden="true"/>
         </div>
     );
   }

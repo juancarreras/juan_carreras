@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/NavBar/NavBar';
-import List from './components/ItemListContainer/ItemListContainer';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import ItemCount from './components/ItemCount/ItemCount';
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <header>
       </header>
       <main>
-      <List hola="usuari@"/>
+      <ItemListContainer hola="USUARI@"/>
       </main>
+      <ItemCount hola="usuari@"/>
     </div>
   );
 }
