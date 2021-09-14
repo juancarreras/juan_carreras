@@ -6,7 +6,8 @@ function ItemCount() {
   return (
     <div className="container">
         <h3>Contador de clicks</h3>
-        <button onClick={() => setCount(count + 1)} class="btn btn-success">Apretar</button>
+        <button onClick={() => setCount(count - 1)} className="btn btn-danger">-</button>
+        <button onClick={() => setCount(count + 1)} className="btn btn-success">+</button>
       <p>Clickeaste {count} veces</p>
     </div>
   );
