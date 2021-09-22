@@ -1,37 +1,64 @@
-import React, { useState } from 'react';
+import * as React from "react";
+import ItemDetail from "../ItemDetail/ItemDetail"
 
-function ItemDetailContainer() {
-    const [prod, setProd] = React.useState([]);
 
-    React.useEffect(()=> {
-        const url = 'https://fakestoreapi.com/products?limit=1';        
-        fetch(url).then((response)=>{
-            if (response.ok){
+const ItemDetailContainer = () => {
+
+  const [data, setData] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+
+
+
+    setLoading(true);
+    getProductos()
+      .then((response) => setData(response))
+      .catch((error) => setError(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const getProductos = () => {
+    const url = 'https://fakestoreapi.com/products?limit=1';
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          fetch(url)
+            .then((response) => {
+              if (response.ok) {
                 return response.json();
-            }else {
+              } else {
                 throw response;
-            }
-        })
-        .then((data) => setProd(data))
-        .catch((error)=> console.log('Se rompio todo'));
-    }, [])
-    return(
-        <div>
-        {prod?.map(producto => {
-            return(
-                <div>
-                <h3>{producto.title}</h3>
-                <h6>Precio: ${producto.price}</h6>
-                <p>{producto.description}</p>
-                <img src={producto.image} style={{height:'200px'}, {width: '200px'}}/>
-                </div>
+              }
+            })
+        )
+      }, 5000)
+    })
+  }
+  return (
+    <>
+      <div style={{ display: "flex", justifyContent: "space-evenly", flexWrap: "wrap" }}>
+        {loading && <p>Cargando...</p>}
+        {error && (
+          <p>
+            Ha habido un error: {error.status} {error.statusText}
+          </p>
+        )}
 
-            );
+        {data?.map((item) => {
+          return (
+            <ItemDetail
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              price={item.price}
+            />
+          );
         })}
-    </div>
-    )
-
-    
-}
+      </div>
+    </>
+  );
+};
 
 export default ItemDetailContainer;

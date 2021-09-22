@@ -1,0 +1,28 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: max-content;
+    border: 3px solid black;
+    border-radius: 10px;
+    margin-bottom: 5em;
+}
+
+.cardTitle {
+    font-size: 1.2em;
+    padding-top: 20px;
+}
+
+.cardImg {
+    width: 250px;
+    height: 250px;
+}
+
+.cardDescription {
+    font-size: 0.7em;
+}
+
+.cardPrice {
+    font-size: 0.7em;
+    font-weight: 700;
+}
