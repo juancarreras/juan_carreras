@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
   }, []);
 
   const getProductos = () => {
-    const url = 'https://fakestoreapi.com/products?limit=1';
+    const url = 'https://fakestoreapi.com/products?limit=14';
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(
@@ -33,7 +33,7 @@ const ItemDetailContainer = () => {
               }
             })
         )
-      }, 5000)
+      }, 2000)
     })
   }
   return (

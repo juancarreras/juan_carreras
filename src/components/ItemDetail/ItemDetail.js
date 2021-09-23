@@ -1,3 +1,6 @@
+import './ItemDetail';
+
+
 const ItemDetail = ({ title, description, image, price }) => {
   return (
     <div className="cardContainer">
