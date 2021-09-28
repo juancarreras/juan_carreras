@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
+import * as React from "react";
+import { Link } from "react-router-dom";
 
-function ItemCount() {
-  const [count, setCount] = useState(0);
+function ItemCount({ count, btnSubs, btnAdd, comprar }) {
 
   return (
-    <div className="container text-center">
-        <h3>Contador de clicks</h3>
-        <button onClick={() => setCount(count - 1)} className="btn btn-danger">-</button>
-        <button onClick={() => setCount(count + 1)} className="btn btn-success">+</button>
-      <p>Clickeaste {count} veces</p>
+    <div className="container item-count">
+      <div className="row">
+        <div className="col d-flex align-items-center">
+          <a onClick={() => btnSubs()} className="btn btn-danger btn-count"><i className="fas fa-minus"></i></a>
+        </div>
+        <div className="col d-flex align-items-center">
+          <p className="count"><b>{count}</b></p>
+        </div>
+        <div className="col d-flex align-items-center">
+          <a onClick={() => btnAdd()} className="btn btn-success btn-count"><i className="fas fa-plus"></i></a>
+        </div>
+      </div>
+    <Link to={`/cart`}>
+    <button className="btn btn-succes" type="button" onClick={() => comprar()}>COMPRAR</button>
+    </Link>
     </div>
   );
 }
 export default ItemCount;
-
