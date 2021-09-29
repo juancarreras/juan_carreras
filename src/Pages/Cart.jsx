@@ -4,6 +4,9 @@ import { useCart } from "../context/CartContext";
 
 const Cart = () => {
   const { cart } = useCart();
+  const { removeItem } = useCart();
+  const {clear} = useCart();
+
   console.log(cart)
   return (
     <>
@@ -32,9 +35,11 @@ const Cart = () => {
             </td>
             <td class="text-right"><span name="price">{item.qty}</span></td>
             <td class="text-right"> $<span name="price">{item.price}</span></td>
-            <td class="text-right"><button class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i> </button> </td>
+            <td className="text-right"><button className="btn btn-sm btn-danger" onClick={() => { removeItem(item.id) }} ><i className="fa fa-trash"></i> </button> </td>
         </tr>
+        <button className="btn btn-danger" onClick={()=>{clear()}}>Vaciar carrito</button>
        </div>
+        
     )
         })}
       </>
