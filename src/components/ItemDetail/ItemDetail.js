@@ -1,31 +1,35 @@
-import './ItemDetail';
+
+  
 import * as React from "react";
 import ItemCount from "../ItemCount/ItemCount";
+import { useCart } from "../../context/CartContext";
 
 
 
 const ItemDetail = ({ title, description, image, price }) => {
 
+  const { addItem } = useCart();
   const [count, setCount] = React.useState(0);
-  const [cantAComprar, setCantAComprar] = React.useState(0);
 
   const btnAdd = () => {
     setCount((count) => count + 1);
-    console.log(count);
+
   };
   const btnSubs = () => {
     setCount((count) => count - 1);
   };
 
-  const comprar = () => {
+  const addToCart = () => {
     const dataToSend = {
       title: title,
       description: description,
       qty: count,
       price: price
     }
-    console.log(dataToSend);
+    
+    addItem(dataToSend);
   };
+
 
   return (
     <div className="cardContainer col-lg-4">
@@ -38,9 +42,10 @@ const ItemDetail = ({ title, description, image, price }) => {
       <ItemCount count={count}
       btnSubs={btnSubs}
       btnAdd={btnAdd}
-      comprar={comprar}
+      comprar={addToCart}
       />
     </div>
   );
 };
+
 export default ItemDetail;

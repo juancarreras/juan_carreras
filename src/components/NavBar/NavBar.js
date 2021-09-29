@@ -20,7 +20,9 @@ function Navbar() {
             </ul>
 
             <form className="d-flex">
+            <Link className="nav-link" to={`/cart`}>
             <div> <ShoppingCart /></div>
+            </Link>
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
         <button className="btn btn-outline-success" type="submit">Search</button>
       </form>
