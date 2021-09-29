@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartContext";
 
 
 
-const ItemDetail = ({ title, description, image, price }) => {
+const ItemDetail = ({ id,title, description, image, price }) => {
 
   const { addItem } = useCart();
   const [count, setCount] = React.useState(0);
@@ -21,10 +21,12 @@ const ItemDetail = ({ title, description, image, price }) => {
 
   const addToCart = () => {
     const dataToSend = {
+      id:id,
       title: title,
       description: description,
       qty: count,
-      price: price
+      price: price,
+      img:image
     }
     
     addItem(dataToSend);
@@ -33,6 +35,7 @@ const ItemDetail = ({ title, description, image, price }) => {
 
   return (
     <div className="cardContainer col-lg-4">
+      <p>{id}</p>
       <h3 className="cardTitle">{title}</h3>
       <div  className="cardImgContainer">
         <img src={image} alt={title} className="cardImg" />

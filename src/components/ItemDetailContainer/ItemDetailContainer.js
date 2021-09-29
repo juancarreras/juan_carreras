@@ -33,7 +33,7 @@ const ItemDetailContainer = () => {
               }
             })
         )
-      }, 2000)
+      },)
     })
   }
 
@@ -50,6 +50,7 @@ const ItemDetailContainer = () => {
         {data?.map((item) => {
           return (
             <ItemDetail
+              id={item.id}
               title={item.title}
               description={item.description}
               image={item.image}

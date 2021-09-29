@@ -7,21 +7,35 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
 
   const addItem = (item) => {
-    const newItem = { item };
-    setCart((prevState) => [...prevState, newItem]);
+    if (!exist(item.id)) {
+      setCart([...cart, item]);
+    } else {
+      cart.forEach((product, index) => {
+        if (product.id === item.id) {
+          cart[index].qty = item.qty;
+          setCart([...cart]);
+        }
+      });
+    }
   };
 
+ 
+  const exist = (id) => {
+    const isIqual = cart.find((item) => item.id === id);
+    return isIqual === undefined ? false : true;
+  };
+
+
+
   const removeItem = (id) => {
-    // Eliminar producto con id elegido.
+    const deleteProduct = cart.filter((item) => item.id !== id);
+    setCart(deleteProduct);
   };
 
   const clear = () => {
     setCart([]);
   };
 
-  const isInCart = (id) => {
-    // Chequear si existe un producto con el id elegido.
-  };
 
   const getQuantity = () => {
     let quantity = 0;
@@ -31,7 +45,7 @@ export const CartProvider = ({ children }) => {
     return quantity;
   };
 
-  const value = { cart, addItem, removeItem, clear, isInCart, getQuantity };
+  const value = { cart, addItem, removeItem, clear, exist, getQuantity };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
