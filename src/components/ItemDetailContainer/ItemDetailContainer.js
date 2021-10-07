@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getFirestore } from "../../firebase";
 import ItemDetail from "../ItemDetail/ItemDetail"
 
 
@@ -9,33 +10,21 @@ const ItemDetailContainer = () => {
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
+    const db = getFirestore();
+    const productCollection = db.collection("items");
 
 
-
-    setLoading(true);
-    getProductos()
-      .then((response) => setData(response))
-      .catch((error) => setError(error))
-      .finally(() => setLoading(false));
+    productCollection.get()
+    .then((querySnapshot) => {
+      if(querySnapshot.empty) {
+        console.log("No hay productos")
+      }else{
+        setData(querySnapshot.docs.map((doc) => ({id: doc.id, ...doc.data()})));
+      }
+    })
+    .catch(() => {});
   }, []);
 
-  const getProductos = () => {
-    const url = 'https://fakestoreapi.com/products?limit=14';
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(
-          fetch(url)
-            .then((response) => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                throw response;
-              }
-            })
-        )
-      },)
-    })
-  }
 
   return (
     <>
@@ -50,12 +39,12 @@ const ItemDetailContainer = () => {
         {data?.map((item) => {
           return (
             <ItemDetail
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              image={item.image}
-              price={item.price}
-            />
+                id={item.id}
+                title={item.title}
+                description={item.description}
+                image={item.image}
+                price={item.price}
+              />
           );
         })}
       </div>
