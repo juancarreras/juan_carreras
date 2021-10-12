@@ -1,18 +1,43 @@
 import * as React from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
-
+import { getFirestore } from "../firebase";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 const Cart = () => {
+  const { cartSummary } = useCart();
+  cartSummary();
   const { cart } = useCart();
   const { removeItem } = useCart();
   const { clear } = useCart();
+  const { subtotal} =useCart();
+  const { envio} = useCart();
+  const { total } = useCart();
   console.log(cart)
   const cartLenght = cart.length;
-  let subtotal = 0;
-  let envio = 0;
-  let total = 0;
+  let itemSummary = [];
 
+  cart.forEach((item) => {
+    itemSummary.push({item: item.title, quantity: item.qty, price: item.price});
+  });
+
+  const newOrder = {
+    buyer: { name: "Juan Carreras", phone: 34127867129, email: "j@gmail.com" },
+    items: itemSummary,
+    total: total,
+    date: firebase.firestore.FieldValue.serverTimestamp(),
+  };
+
+  const handleCheckout = () => {
+    const db = getFirestore();
+    const ordersCollection = db.collection("orders");
+
+    ordersCollection
+      .add(newOrder)
+      .then((docRef) => console.log(docRef))
+      .catch((error) => console.log(error));
+  };
 
 
 
@@ -49,11 +74,9 @@ const Cart = () => {
                 <tbody id="resumenCarrito">
 
                   {cart?.map((item) => {
-                    subtotal += (item.price * item.qty);
-                    envio = parseFloat(subtotal * 0.15);
-                  total = parseFloat(subtotal + envio);
+                
                     return (
-                      <tr>
+                      <tr key={item.id}>
                         <td><img src={item.img} style={{ height: 150, width: 150, }} /> </td>
                         <td>{item.title}</td>
                         <td>En stock</td>
@@ -106,7 +129,7 @@ const Cart = () => {
                 <a className="btn btn-block btn-secondary" href="index.html">Continuar Comprando</a>
               </div>
               <div className="col-sm-12 col-md-6 text-right">
-                <a href="#" className="btn btn-lg btn-block btn-success text-uppercase">Finalizar Compra</a>
+              <button href="#" className="btn btn-lg btn-block btn-success text-uppercase" onClick={() => { handleCheckout() }}>Finalizar Compra</button>
               </div>
             </div>
           </div>

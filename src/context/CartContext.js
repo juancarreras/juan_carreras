@@ -5,6 +5,9 @@ CartContext.displayName = "CartContext";
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = React.useState([]);
+  const [subtotal, setSubtotal] = React.useState();
+  const [total, setTotal] = React.useState();
+  const [envio, setEnvio] = React.useState();
 
   const addItem = (item) => {
     if (!exist(item.id)) {
@@ -45,7 +48,22 @@ export const CartProvider = ({ children }) => {
     return quantity;
   };
 
-  const value = { cart, addItem, removeItem, clear, exist, getQuantity };
+  const cartSummary = () => {
+    let subtotal = 0;
+    let envio = 0;
+
+    cart.forEach((item) => {
+      subtotal += (item.price * item.qty);
+      envio = (parseFloat(subtotal * 0.15));
+    });
+
+    setSubtotal(subtotal);
+    setEnvio(envio);
+    setTotal(parseFloat(subtotal + envio));
+  };
+
+
+  const value = { cart, addItem, removeItem, clear, exist, getQuantity, cartSummary, subtotal, envio, total };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
