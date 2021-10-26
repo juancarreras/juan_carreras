@@ -126,10 +126,14 @@ const Cart = () => {
           <div className="col mb-2">
             <div className="row">
               <div className="col-sm-12  col-md-6">
+              <Link to={`/ItemDetailContainer`}>
                 <a className="btn btn-block btn-secondary" href="index.html">Continuar Comprando</a>
+                </Link>
               </div>
               <div className="col-sm-12 col-md-6 text-right">
+              <Link to={'/thanks'}>
               <button href="#" className="btn btn-lg btn-block btn-success text-uppercase" onClick={() => { handleCheckout() }}>Finalizar Compra</button>
+              </Link>
               </div>
             </div>
           </div>

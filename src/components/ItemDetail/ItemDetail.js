@@ -34,20 +34,24 @@ const ItemDetail = ({ id,title, description, image, price }) => {
 
 
   return (
-    <div className="cardContainer col-lg-4">
-      <p>{id}</p>
-      <h3 className="cardTitle">{title}</h3>
-      <div  className="cardImgContainer">
-        <img src={image} alt={title} className="cardImg" />
-      </div>
-      <p className="cardDescription">{description}</p>
-      <p className="cardPrice">$ {price}</p>
-      <ItemCount count={count}
+    <div class="card estilo-c">
+      <a href="#">
+        <div class="img-container">
+          <img src={image} alt="producto 1"/>
+        </div>
+       </a>
+      <div class="info-container">
+        <h3>{title}</h3>
+        <p className="cardDescription">{description}</p>
+        <strong>$ {price}</strong>
+        <ItemCount count={count}
       btnSubs={btnSubs}
       btnAdd={btnAdd}
       comprar={addToCart}
       />
-    </div>
+      </div>
+     
+    </div>    
   );
 };
 

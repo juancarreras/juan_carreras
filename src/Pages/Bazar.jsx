@@ -1,9 +1,9 @@
 import * as React from "react";
-import { getFirestore } from "../../firebase";
-import ItemDetail from "../ItemDetail/ItemDetail"
+import { getFirestore } from "../firebase/";
+import ItemDetail from "../components/ItemDetail/ItemDetail"
 
 
-const ItemDetailContainer = () => {
+const Bazar = () => {
 
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -37,6 +37,7 @@ const ItemDetailContainer = () => {
         )}
 
         {data?.map((item) => {
+            if (item.categoryId == "Bazar"){
           return (
             <ItemDetail
                 key={item.id}
@@ -46,10 +47,10 @@ const ItemDetailContainer = () => {
                 price={item.price}
               />
           );
-        })}
+        }})}
       </div>
     </>
   );
 };
 
-export default ItemDetailContainer;
+export default Bazar;
