@@ -1,19 +1,19 @@
 import * as React from "react";
-import { useCart } from "../context/CartContext";
+import { UseCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import { getFirestore } from "../firebase";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 
 const Cart = () => {
-  const { cartSummary } = useCart();
+  const { cartSummary } = UseCart();
   cartSummary();
-  const { cart } = useCart();
-  const { removeItem } = useCart();
-  const { clear } = useCart();
-  const { subtotal} =useCart();
-  const { envio} = useCart();
-  const { total } = useCart();
+  const { cart } = UseCart();
+  const { removeItem } = UseCart();
+  const { clear } = UseCart();
+  const { subtotal} =UseCart();
+  const { envio} = UseCart();
+  const { total } = UseCart();
   console.log(cart)
   const cartLenght = cart.length;
   let itemSummary = [];

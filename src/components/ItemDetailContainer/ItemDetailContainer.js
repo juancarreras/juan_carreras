@@ -40,6 +40,7 @@ const ItemDetailContainer = () => {
           return (
             <ItemDetail
                 key={item.id}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 image={item.image}

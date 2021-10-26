@@ -2,13 +2,13 @@
   
 import * as React from "react";
 import ItemCount from "../ItemCount/ItemCount";
-import { useCart } from "../../context/CartContext";
+import { UseCart } from "../../context/CartContext";
 
 
 
 const ItemDetail = ({ id,title, description, image, price }) => {
 
-  const { addItem } = useCart();
+  const { addItem } = UseCart();
   const [count, setCount] = React.useState(0);
 
   const btnAdd = () => {

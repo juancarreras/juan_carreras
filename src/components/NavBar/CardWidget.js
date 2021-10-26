@@ -1,7 +1,7 @@
-import { useCart } from "../../context/CartContext";
+import { UseCart } from "../../context/CartContext";
 
 function ShoppingCart() {
-    const { cart } = useCart();
+    const { cart } = UseCart();
     let itemCount = 0;
 
     {
